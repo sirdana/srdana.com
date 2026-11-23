@@ -968,6 +968,65 @@
   [dir="rtl"] .faq summary .q{text-align:right}
   [dir="rtl"] .msg-pill .ph{text-align:right}
 </style>
+<style>
+  /* ================================================================
+     LANGUAGE, INSIDE + ALIVE — a real switcher inside the menu,
+     a dark thumb that glides between the three languages, and a
+     soft whole-page settle whenever the language changes.
+     Transform/opacity only — nothing here can lag.
+     ================================================================ */
+  .lang-switch{position:relative}
+  .lang-switch button{position:relative;z-index:1;transition:background .2s,color .25s,transform .15s var(--ease)}
+  .lang-switch button:active{transform:scale(.93)}
+  .ls-thumb{position:absolute;top:5px;bottom:5px;left:0;width:0;border-radius:999px;background:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 3px 0 rgba(10,8,6,.8);opacity:0;pointer-events:none;transition:transform .55s cubic-bezier(.34,1.25,.4,1),width .55s cubic-bezier(.34,1.25,.4,1),opacity .3s ease}
+  .lang-switch.has-thumb .ls-thumb{opacity:1}
+  .lang-switch.has-thumb button.active{background:transparent;box-shadow:none}
+
+  /* the switcher inside the full-screen menu, rising in with the rest */
+  .overlay-lang{margin-top:32px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;opacity:0}
+  .overlay.open .overlay-lang{animation:riseIn .8s var(--ease) both;animation-delay:.42s}
+  .overlay-lang .ol-label{font-size:11px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze)}
+  html[lang="ckb"] .overlay-lang .ol-label,html[lang="ar"] .overlay-lang .ol-label{font-family:"Noto Naskh Arabic",serif;font-size:15px;font-weight:700}
+
+  /* language change: the whole page exhales — a soft fade + settle */
+  @keyframes langSwap{from{opacity:.15;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  body.lang-swap .wrap,body.lang-swap .overlay-in,body.lang-swap .intro-in{animation:langSwap .55s var(--ease) both}
+  @media (prefers-reduced-motion: reduce){
+    .ls-thumb{transition:none}
+    .overlay-lang{opacity:1}
+    .overlay.open .overlay-lang{animation:none}
+    body.lang-swap .wrap,body.lang-swap .overlay-in,body.lang-swap .intro-in{animation:none}
+    .lang-switch button:active{transform:none}
+  }
+</style>
+<style>
+  /* ================================================================
+     THE NAME, READING THE RIGHT WAY — "Sir Dana" is a Latin name and
+     must always run left-to-right, letter by letter, even on the RTL
+     Kurdish/Arabic page. Its letters are separate inline-block spans,
+     and inline boxes follow the page direction — in RTL they were
+     being laid out right-to-left, so the name appeared reversed
+     ("anaD riS") and its letters animated in reverse order too.
+     Isolating the name as LTR fixes the reading order, the letter
+     order and the animation order in all three languages. The same
+     isolation keeps Latin stat values in order ("9+ yrs").
+     The letters now RISE UP softly into place, in reading order —
+     and tapping the name replays that gentle rise.
+     ================================================================ */
+  .intro-word{direction:ltr;unicode-bidi:isolate}
+  .intro-word .ltrs{direction:ltr;unicode-bidi:isolate}
+  .wordmark{direction:ltr;unicode-bidi:isolate}
+  .bstat b,.stat b{direction:ltr;unicode-bidi:isolate}
+  /* rise up from below, soft and calm — replaces the drop-from-above */
+  @keyframes letterIn{from{opacity:0;transform:translateY(.55em)}to{opacity:1;transform:translateY(0)}}
+  /* a tap on the name replays the rise, letter by letter, S → a */
+  .intro-word{cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .intro-word.replay .ltr{animation:letterIn .6s cubic-bezier(.22,.68,.26,1) both;animation-delay:calc(var(--d,0s) - .42s)}
+  @media (prefers-reduced-motion: reduce){
+    .intro-word{cursor:default}
+    .intro-word.replay .ltr{animation:none}
+  }
+</style>
 </head>
 <body class="intro-locked">
 <!-- INTRO GATE — beautiful opening screen; music starts on Enter -->
@@ -991,6 +1050,7 @@
     <p class="intro-ku" lang="ckb" dir="rtl" data-i18n="intro.ku">بەخێر بێن 🌹 ئەکاونتەکەت لێرە پارێزراوە</p>
     <div class="intro-actions">
       <div class="lang-switch intro-switch" role="group" aria-label="Language — زمان — اللغة">
+        <span class="ls-thumb" aria-hidden="true"></span>
         <button type="button" data-lang="ku" class="active" aria-pressed="true">کوردی</button>
         <button type="button" data-lang="ar" aria-pressed="false">العربية</button>
         <button type="button" data-lang="en" aria-pressed="false">English</button>
@@ -1023,6 +1083,15 @@
       <a class="ov-item" href="#help-h"><span class="num">03</span><span class="word"><em data-i18n="t9t">Help</em></span><span class="arr" aria-hidden="true">↗</span></a>
       <a class="ov-item" href="https://www.instagram.com/sir.d4na" target="_blank" rel="noopener"><span class="num">04</span><span class="word"><em data-i18n="menu.contact">Contact</em></span><span class="arr" aria-hidden="true">↗</span></a>
     </nav>
+    <div class="overlay-lang">
+      <span class="ol-label" data-i18n="lang.label">Language</span>
+      <div class="lang-switch" role="group" aria-label="Language — زمان — اللغة">
+        <span class="ls-thumb" aria-hidden="true"></span>
+        <button type="button" data-lang="ku" class="active" aria-pressed="true">کوردی</button>
+        <button type="button" data-lang="ar" aria-pressed="false">العربية</button>
+        <button type="button" data-lang="en" aria-pressed="false">English</button>
+      </div>
+    </div>
     <div class="overlay-sub">
       <a href="#risk-h" data-i18n="t2t">Risk Check</a>
       <a href="#lock-h" data-i18n="t3t">Full Lockdown</a>
@@ -1033,7 +1102,6 @@
     </div>
     <div class="overlay-foot">
       <a class="of-handle" href="https://www.instagram.com/sir.d4na" target="_blank" rel="noopener">@sir.d4na</a>
-      <span class="of-langs" data-i18n="langs.line">Kurdish • Arabic • English</span>
     </div>
   </div>
 </div>
@@ -1094,6 +1162,7 @@
     </div>
 
     <div class="lang-switch hero-switch rev d7" role="group" aria-label="Language — زمان — اللغة">
+      <span class="ls-thumb" aria-hidden="true"></span>
       <button type="button" data-lang="ku" class="active" aria-pressed="true">کوردی</button>
       <button type="button" data-lang="ar" aria-pressed="false">العربية</button>
       <button type="button" data-lang="en" aria-pressed="false">English</button>
@@ -1917,6 +1986,7 @@
     "menu.steps":"هەنگاوەکان",
     "menu.contact":"پەیوەندی",
     "top.est":"لە 2016ەوە",
+    "lang.label":"زمان",
     "langs.line":"کوردی • عەرەبی • ئینگلیزی",
     "hero.eyebrow":"ئاسایشی ئەکاونت — لە 2016ەوە",
     "hero.tag":"یارمەتیت دەدەم <strong>ئەکاونتی ئینستاگرامەکەت بپارێزیت</strong> — پێش ئەوەی کەسێکی تر پێی بگات. پشکنینی تەواو، 2FA ـی دروست، و داخستنی هەموو خاڵە لاوازەکان.",
@@ -2101,6 +2171,7 @@
     "menu.steps":"الخطوات",
     "menu.contact":"تواصل",
     "top.est":"منذ 2016",
+    "lang.label":"اللغة",
     "langs.line":"الكردية • العربية • الإنجليزية",
     "hero.eyebrow":"أمن الحسابات — منذ 2016",
     "hero.tag":"أساعدك على <strong>حماية حسابك على إنستغرام</strong> — قبل أن يصل إليه أي شخص آخر. فحص كامل، وتفعيل صحيح للتحقق بخطوتين، وإغلاق كل نقاط الضعف.",
@@ -2292,6 +2363,19 @@
     var m = MUSIC[cur] || MUSIC.en;
     return playing ? m.off : m.on;
   };
+  /* the dark thumb glides to whichever language is active, in every switcher */
+  function placeThumbs(){
+    Array.prototype.forEach.call(document.querySelectorAll('.lang-switch'), function(sw){
+      var thumb = sw.querySelector('.ls-thumb');
+      var btn = sw.querySelector('button.active');
+      if(!thumb || !btn) return;
+      thumb.style.width = btn.offsetWidth + 'px';
+      thumb.style.transform = 'translateX(' + btn.offsetLeft + 'px)';
+      sw.classList.add('has-thumb');
+    });
+  }
+  var swapTimer = null;
+  var firstLang = true;
   function setLang(lang){
     if(lang !== 'ku' && lang !== 'ar' && lang !== 'en') lang = 'ku';
     cur = lang;
@@ -2321,12 +2405,43 @@
     });
     var mb = document.getElementById('musicBtn');
     if(mb) mb.setAttribute('aria-label', window.sdMusicLabel(mb.getAttribute('aria-pressed') === 'true'));
+    /* a soft settle over the whole page whenever the language changes —
+       the first call (on load) stays still, only real switches move */
+    if(firstLang){ firstLang = false; }
+    else{
+      document.body.classList.remove('lang-swap');
+      void document.body.offsetWidth;
+      document.body.classList.add('lang-swap');
+      if(swapTimer) clearTimeout(swapTimer);
+      swapTimer = setTimeout(function(){ document.body.classList.remove('lang-swap'); }, 640);
+    }
+    placeThumbs();
   }
   Array.prototype.forEach.call(document.querySelectorAll('.lang-switch button'), function(b){
     b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
   });
   window.sdSetLang = setLang;
+  window.addEventListener('resize', placeThumbs);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ placeThumbs(); });
   setLang('ku');
+})();
+</script>
+<script>
+(function(){
+  /* ---------- the intro name: a tap replays its soft rise ----------
+     The letters rise up one after another, in reading order. Tapping
+     the name runs that gentle rise again — nothing else changes. */
+  var word = document.querySelector('.intro-word');
+  if(!word) return;
+  word.setAttribute('role', 'button');
+  word.setAttribute('aria-label', 'Sir Dana');
+  word.setAttribute('title', 'Sir Dana');
+  function rise(){
+    word.classList.remove('replay');
+    void word.offsetWidth;
+    word.classList.add('replay');
+  }
+  word.addEventListener('click', rise);
 })();
 </script>
 </body>
