@@ -1051,6 +1051,99 @@
     .intro-word.replay .ltr{animation:none}
   }
 </style>
+<style>
+  /* ================================================================
+     DESKTOP — a true computer layout. Below 1024px nothing here
+     applies and the phone design stands exactly as it was. On a
+     wide screen the page opens out: a broader stage, the intro
+     becomes a two-panel welcome (artwork beside the words), the
+     hero spreads its actions and stats across the width, the tile
+     grid becomes a four-column wall with a full-width closing
+     tile, the menu opens as a two-column index, and every section
+     opened in the viewer uses the width in two or three columns
+     instead of one long phone column. Grid areas follow the page
+     direction, so Kurdish/Arabic (RTL) and English (LTR) both lay
+     out correctly.
+     ================================================================ */
+  @media (min-width:1024px){
+
+    /* ---------- the stage ---------- */
+    .wrap{max-width:1220px;padding:34px 48px 96px}
+    .overlay-in{max-width:1220px;padding:26px 48px 48px}
+
+    /* ---------- top bar ---------- */
+    .topbar .wordmark{font-size:27px}
+    .topbar .tb-left{font-size:11.5px}
+    .menu-btn{width:56px;height:56px}
+
+    /* ---------- intro: artwork panel beside the welcome words ---------- */
+    .intro{padding:48px 56px}
+    .intro-in{max-width:1120px;display:grid;grid-template-columns:.92fr 1.08fr;grid-template-areas:"art eye" "art word" "art tag" "art ku" "art act";column-gap:72px;align-items:center;text-align:start}
+    .intro-art-wrap{grid-area:art;justify-self:center;align-self:center}
+    .intro-art{width:min(330px,30vw)}
+    .intro-eyebrow{grid-area:eye;justify-content:flex-start;margin:0}
+    .intro-word{grid-area:word;font-size:clamp(64px,6.2vw,92px)}
+    .intro-tag{grid-area:tag;margin:16px 0 0}
+    .intro-ku{grid-area:ku;margin:12px 0 0}
+    .intro-actions{grid-area:act;align-items:flex-start;margin-top:32px}
+    .intro-note{text-align:start}
+
+    /* ---------- hero: the name spans the top, actions fill the side ---------- */
+    .bhero{display:grid;grid-template-columns:1.08fr .92fr;column-gap:60px;align-items:start;padding-top:52px}
+    .beyebrow{grid-column:1 / -1}
+    .bname{grid-column:1 / -1}
+    .bl{font-size:clamp(150px,13.5vw,196px)}
+    .bshield{top:44px;width:150px}
+    .bhero > .rev.d4{grid-column:1;margin-top:24px}
+    .bhero .tagline{grid-column:1}
+    .bact{grid-column:2;grid-row:3 / span 3;align-self:stretch}
+    .ba{flex:1}
+    .hero-switch{grid-column:1;justify-self:start}
+    .bhero .kurdish{grid-column:1;max-width:560px}
+    .bstats{grid-column:1 / -1;gap:14px}
+    .bstat{padding:20px 20px 17px}
+    .bstat b{font-size:32px}
+    .ticker{grid-column:1 / -1}
+
+    /* ---------- tile wall: four columns, closing tile full width ---------- */
+    .bento{grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
+    .btile{min-height:196px;padding:24px}
+    .btile.wide{grid-column:span 2;min-height:196px}
+    .bento .btile:last-child{grid-column:1 / -1;min-height:150px}
+    .bt-tx b{font-size:24px}
+    .btile.wide .bt-tx b{font-size:26px}
+
+    /* ---------- full-screen menu: two-column index ---------- */
+    .overlay-nav{grid-template-columns:1fr 1fr;column-gap:64px;margin-top:6vh}
+    .ov-item{padding:24px 4px}
+    .ov-item .word{font-size:clamp(44px,4.6vw,62px)}
+
+    /* ---------- opened sections use the width ---------- */
+    section{padding:48px 46px 38px}
+    .sec-head h2{font-size:52px}
+    .sec-head .sub{font-size:16px}
+    .services{grid-template-columns:1fr 1fr;column-gap:44px}
+    .services .service{border-top:1px solid var(--line-soft)}
+    .services .service.featured{grid-column:1 / -1;border-top:none}
+    .risk-list{column-count:2;column-gap:30px}
+    .risk-list li{break-inside:avoid}
+    .lock-grid{grid-template-columns:repeat(4,1fr);gap:13px}
+    .steps{grid-template-columns:1fr 1fr;column-gap:48px}
+    .steps .step{border-top:1px solid var(--line-soft)}
+    .steps .step:nth-child(-n+2){border-top:none}
+    .tips{grid-template-columns:repeat(3,1fr);gap:13px}
+    .prep ul{grid-template-columns:1fr 1fr;column-gap:36px}
+    .faq{grid-template-columns:1fr 1fr;column-gap:44px}
+    .faq details{border-top:1px solid var(--line-soft)}
+    .faq details:nth-child(-n+2){border-top:none}
+    .bato .kurdish{max-width:640px}
+    .final{padding:52px 40px 38px}
+    .final h2{font-size:46px}
+    .final .btn-primary{max-width:520px;margin-left:auto;margin-right:auto}
+    .cta{padding:34px}
+    .cta .btn-primary,.cta .btn-ghost{max-width:560px;margin-left:auto;margin-right:auto}
+  }
+</style>
 </head>
 <body class="intro-locked">
 <!-- INTRO GATE — beautiful opening screen; music starts on Enter -->
