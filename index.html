@@ -976,9 +976,9 @@
      Transform/opacity only — nothing here can lag.
      ================================================================ */
   .lang-switch{position:relative}
-  .lang-switch button{position:relative;z-index:1;transition:background .2s,color .25s,transform .15s var(--ease)}
-  .lang-switch button:active{transform:scale(.93)}
-  .ls-thumb{position:absolute;top:5px;bottom:5px;left:0;width:0;border-radius:999px;background:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 3px 0 rgba(10,8,6,.8);opacity:0;pointer-events:none;transition:transform .55s cubic-bezier(.34,1.25,.4,1),width .55s cubic-bezier(.34,1.25,.4,1),opacity .3s ease}
+  .lang-switch button{position:relative;z-index:1;transition:background .35s ease,color .5s ease,transform .25s var(--ease)}
+  .lang-switch button:active{transform:scale(.96)}
+  .ls-thumb{position:absolute;top:5px;bottom:5px;left:0;width:0;border-radius:999px;background:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 3px 0 rgba(10,8,6,.8);opacity:0;pointer-events:none;transition:transform .78s cubic-bezier(.22,.68,.26,1),width .78s cubic-bezier(.22,.68,.26,1),opacity .4s ease}
   .lang-switch.has-thumb .ls-thumb{opacity:1}
   .lang-switch.has-thumb button.active{background:transparent;box-shadow:none}
 
@@ -988,14 +988,38 @@
   .overlay-lang .ol-label{font-size:11px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze)}
   html[lang="ckb"] .overlay-lang .ol-label,html[lang="ar"] .overlay-lang .ol-label{font-family:"Noto Naskh Arabic",serif;font-size:15px;font-weight:700}
 
-  /* language change: the whole page exhales — a soft fade + settle */
-  @keyframes langSwap{from{opacity:.15;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-  body.lang-swap .wrap,body.lang-swap .overlay-in,body.lang-swap .intro-in{animation:langSwap .55s var(--ease) both}
+  /* language change — two gentle phases, never a snap:
+     1) the page softly fades out, sinks a little and blurs,
+     2) the words + direction change while the page is invisible,
+     3) the page fades back in more slowly than it left, settling
+        into place while the dark thumb glides to the new language.
+     The fade-out is quicker than the fade-in (asymmetric timing
+     comes from the destination state's transition), so arriving
+     always feels calmer than leaving. */
+  body.lang-anim .wrap,
+  body.lang-anim .overlay-in,
+  body.lang-anim .intro-in{
+    transition:opacity .72s cubic-bezier(.22,.68,.26,1),transform .72s cubic-bezier(.22,.68,.26,1),filter .72s ease;
+    will-change:opacity,transform,filter;
+  }
+  body.lang-anim.lang-out .wrap,
+  body.lang-anim.lang-out .overlay-in,
+  body.lang-anim.lang-out .intro-in{
+    transition:opacity .38s cubic-bezier(.4,0,.2,1),transform .44s cubic-bezier(.4,0,.2,1),filter .38s ease;
+    opacity:0;
+    transform:translateY(12px) scale(.997);
+    filter:blur(5px);
+  }
+  /* while a change is in flight, taps on the page wait — taps on
+     the language buttons themselves still register and queue */
+  body.lang-anim .wrap,body.lang-anim .overlay-in,body.lang-anim .intro-in{pointer-events:none}
+  body.lang-anim .lang-switch,body.lang-anim .lang-switch button{pointer-events:auto}
   @media (prefers-reduced-motion: reduce){
-    .ls-thumb{transition:none}
+    .ls-thumb{transition:opacity .3s ease}
     .overlay-lang{opacity:1}
     .overlay.open .overlay-lang{animation:none}
-    body.lang-swap .wrap,body.lang-swap .overlay-in,body.lang-swap .intro-in{animation:none}
+    body.lang-anim .wrap,body.lang-anim .overlay-in,body.lang-anim .intro-in{transition:opacity .3s ease;will-change:auto}
+    body.lang-anim.lang-out .wrap,body.lang-anim.lang-out .overlay-in,body.lang-anim.lang-out .intro-in{transition:opacity .3s ease;transform:none;filter:none}
     .lang-switch button:active{transform:none}
   }
 </style>
@@ -2374,10 +2398,15 @@
       sw.classList.add('has-thumb');
     });
   }
-  var swapTimer = null;
   var firstLang = true;
-  function setLang(lang){
-    if(lang !== 'ku' && lang !== 'ar' && lang !== 'en') lang = 'ku';
+  var langBusy = false;
+  var pendingLang = null;
+  var fadeOutTimer = null;
+  var fadeInTimer = null;
+  /* applyLang does the actual swap — words, direction, title, thumbs.
+     It is only ever called either on first load, or while the page
+     is fully faded out, so the change itself is never seen snapping. */
+  function applyLang(lang){
     cur = lang;
     var dict = lang === 'ku' ? KU : (lang === 'ar' ? AR : null);
     document.documentElement.lang = lang === 'ku' ? 'ckb' : lang;
@@ -2405,17 +2434,58 @@
     });
     var mb = document.getElementById('musicBtn');
     if(mb) mb.setAttribute('aria-label', window.sdMusicLabel(mb.getAttribute('aria-pressed') === 'true'));
-    /* a soft settle over the whole page whenever the language changes —
-       the first call (on load) stays still, only real switches move */
-    if(firstLang){ firstLang = false; }
-    else{
-      document.body.classList.remove('lang-swap');
-      void document.body.offsetWidth;
-      document.body.classList.add('lang-swap');
-      if(swapTimer) clearTimeout(swapTimer);
-      swapTimer = setTimeout(function(){ document.body.classList.remove('lang-swap'); }, 640);
-    }
     placeThumbs();
+  }
+  /* setLang is the gentle, staged change the visitor feels:
+     fade out slowly (380ms) → swap while invisible → fade back in
+     more slowly (720ms) while the thumb glides to the new language.
+     A second tap mid-change queues instead of jumping, and the
+     first call on load stays perfectly still. */
+  function setLang(lang){
+    if(lang !== 'ku' && lang !== 'ar' && lang !== 'en') lang = 'ku';
+    if(firstLang){ firstLang = false; applyLang(lang); return; }
+    if(lang === cur && !langBusy) return;
+    if(langBusy){ pendingLang = lang; return; }
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce){
+      document.body.classList.add('lang-anim');
+      document.body.classList.add('lang-out');
+      langBusy = true;
+      fadeOutTimer = setTimeout(function(){
+        applyLang(lang);
+        document.body.classList.remove('lang-out');
+        fadeInTimer = setTimeout(function(){
+          document.body.classList.remove('lang-anim');
+          langBusy = false;
+          if(pendingLang && pendingLang !== cur){ var nxt = pendingLang; pendingLang = null; setLang(nxt); }
+          else pendingLang = null;
+        }, 320);
+      }, 300);
+      return;
+    }
+    langBusy = true;
+    document.body.classList.add('lang-anim');
+    /* let the transition register before the fade-out begins */
+    void document.body.offsetWidth;
+    document.body.classList.add('lang-out');
+    fadeOutTimer = setTimeout(function(){
+      applyLang(lang);
+      /* one frame at invisible, then release — the fade-in runs
+         on the slower .72s curve and the thumb glides with it */
+      void document.body.offsetWidth;
+      document.body.classList.remove('lang-out');
+      fadeInTimer = setTimeout(function(){
+        document.body.classList.remove('lang-anim');
+        langBusy = false;
+        if(pendingLang && pendingLang !== cur){
+          var next = pendingLang;
+          pendingLang = null;
+          setLang(next);
+        } else {
+          pendingLang = null;
+        }
+      }, 760);
+    }, 430);
   }
   Array.prototype.forEach.call(document.querySelectorAll('.lang-switch button'), function(b){
     b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
