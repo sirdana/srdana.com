@@ -63,10 +63,10 @@
   /* ---------- entrance: pure CSS, always completes, nothing stays hidden ---------- */
   @keyframes riseIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
   @keyframes lineUp{from{transform:translateY(112%)}to{transform:translateY(0)}}
-  .rev{animation:riseIn .95s var(--ease) both}
+  .rev{animation:riseIn 1.25s var(--ease) both}
   .d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}.d4{animation-delay:.34s}
   .d5{animation-delay:.44s}.d6{animation-delay:.54s}.d7{animation-delay:.64s}.d8{animation-delay:.74s}
-  section{animation:riseIn .9s var(--ease) both}
+  section{animation:riseIn 1.2s var(--ease) both}
   section:nth-of-type(1){animation-delay:.30s}
   section:nth-of-type(2){animation-delay:.36s}
   section:nth-of-type(3){animation-delay:.42s}
@@ -75,10 +75,10 @@
   section:nth-of-type(6){animation-delay:.60s}
   section:nth-of-type(7){animation-delay:.66s}
   section:nth-of-type(8){animation-delay:.72s}
-  .cta,.final,footer{animation:riseIn .9s var(--ease) both;animation-delay:.4s}
+  .cta,.final,footer{animation:riseIn 1.2s var(--ease) both;animation-delay:.4s}
 
   /* ---------- TOP BAR — serif wordmark, round menu button ---------- */
-  .topbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:8px 2px 0;animation:riseIn .8s var(--ease) both}
+  .topbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:8px 2px 0;animation:riseIn 1.1s var(--ease) both}
   .topbar .tb-left{font-size:10.5px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--muted-2)}
   .wordmark{font-family:var(--serif);font-weight:600;font-size:31px;letter-spacing:.015em;color:var(--ink);text-decoration:none;line-height:1;white-space:nowrap}
   .wordmark em{font-style:italic;font-weight:500}
@@ -103,7 +103,7 @@
   .overlay-close svg{width:17px;height:17px;display:block}
   .overlay-nav{margin-top:7vh;display:grid}
   .ov-item{display:flex;align-items:baseline;gap:20px;padding:20px 4px;border-bottom:1px solid var(--line-soft);text-decoration:none;color:var(--ink);opacity:0}
-  .overlay.open .ov-item{animation:riseIn .8s var(--ease) both}
+  .overlay.open .ov-item{animation:riseIn 1.1s var(--ease) both}
   .overlay.open .ov-item:nth-child(1){animation-delay:.10s}
   .overlay.open .ov-item:nth-child(2){animation-delay:.18s}
   .overlay.open .ov-item:nth-child(3){animation-delay:.26s}
@@ -134,7 +134,7 @@
   .eyebrow::before,.eyebrow::after{content:"";width:34px;height:1px;background:var(--line)}
   h1{margin:20px 0 0;font-weight:800}
   h1 .mask{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
-  h1 .mask>span{display:block;animation:lineUp 1.05s var(--ease) both}
+  h1 .mask>span{display:block;animation:lineUp 1.5s var(--ease) both}
   h1 .mask:nth-child(1)>span{animation-delay:.22s}
   h1 .mask:nth-child(2)>span{animation-delay:.36s}
   h1 .sans-line{font-family:"Outfit",sans-serif;font-size:clamp(47px,11vw,74px);line-height:1.02;letter-spacing:-.032em;color:var(--ink)}
@@ -182,7 +182,7 @@
   .cta .btn-ghost{margin-top:11px}
 
   /* ---------- DOCK — light floating pills ---------- */
-  .dock{margin-top:30px;display:grid;gap:12px;animation:riseIn .9s var(--ease) both;animation-delay:.5s}
+  .dock{margin-top:30px;display:grid;gap:12px;animation:riseIn 1.2s var(--ease) both;animation-delay:.5s}
   .pillnav{background:var(--paper);border:1px solid var(--line-soft);border-radius:999px;padding:6px;display:flex;gap:2px;box-shadow:var(--shadow)}
   .pillnav a{flex:1;display:flex;align-items:center;justify-content:center;padding:14px 2px;border-radius:999px;text-decoration:none;color:var(--ink);transition:background .25s, color .25s}
   .pillnav a svg{width:26px;height:26px;flex:none}
@@ -312,7 +312,7 @@
   .faq details[open] .chev{transform:rotate(180deg);background:var(--ink);color:#fff;border-color:var(--ink)}
   .faq .a{padding:0 10px 19px;font-size:14px;line-height:1.75;color:var(--muted)}
   .faq .a b{color:var(--ink)}
-  .faq details[open] .a{animation:faqIn .5s var(--ease) both}
+  .faq details[open] .a{animation:faqIn .75s var(--ease) both}
   @keyframes faqIn{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:none}}
 
   /* in-page menu — elegant list */
@@ -352,7 +352,7 @@
   .viewer-close{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:1px solid var(--line);color:var(--ink);cursor:pointer;transition:background .2s, color .2s, transform .2s var(--ease);-webkit-tap-highlight-color:transparent}
   .viewer-close:hover{background:var(--ink);color:#fff;transform:scale(1.05)}
   .viewer-close svg{width:16px;height:16px;display:block}
-  .viewer-slot section{margin-top:14px;animation:viewerIn .8s cubic-bezier(.16,1,.3,1) both}
+  .viewer-slot section{margin-top:14px;animation:viewerIn 1.1s cubic-bezier(.16,1,.3,1) both}
   @keyframes viewerIn{from{opacity:0;transform:translateY(28px) scale(.982);filter:blur(7px)}to{opacity:1;transform:none;filter:blur(0)}}
   /* the content inside an opened section rises in, piece by piece, soft and calm */
   .viewer-slot section .sec-head{animation:viewerItem .6s var(--ease) both;animation-delay:.12s}
@@ -454,7 +454,7 @@
   .intro.gone{display:none}
   .intro-in{position:relative;z-index:1;width:100%;max-width:540px;margin:auto;text-align:center}
   @keyframes introArtIn{from{opacity:0;transform:translateY(22px) scale(1.03)}to{opacity:1;transform:none}}
-  @keyframes introImgZoom{from{transform:scale(1.1)}to{transform:scale(1.02)}}
+  @keyframes introImgZoom{from{transform:scale(1.12) translateY(-1.6%)}to{transform:scale(1.03) translateY(.6%)}}
   @keyframes introUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
   @keyframes introFloat{from{transform:translateY(0)}to{transform:translateY(-7px)}}
   /* the artwork, kept small — a soft breathing halo and a slow golden ring turn behind it */
@@ -464,15 +464,15 @@
   .intro-halo::before{content:"";position:absolute;inset:12%;border-radius:50%;background:conic-gradient(from 210deg, rgba(203,178,127,0), rgba(143,107,35,.5), rgba(228,211,168,0), rgba(163,127,53,.45), rgba(203,178,127,0));-webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));mask:radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));animation:spinRing 26s linear infinite}
   .intro-halo::after{content:"";position:absolute;inset:26%;border-radius:50%;border:1px dashed rgba(143,107,35,.28);animation:spinRing 40s linear infinite reverse}
   .intro-art{position:relative;width:min(248px,58vw);aspect-ratio:.82;margin:0 auto;overflow:hidden;border-radius:999px 999px 26px 26px;background:#fbf6ea;border:1px solid rgba(143,107,35,.28);box-shadow:0 22px 44px rgba(93,72,38,.18), 0 0 54px rgba(201,164,92,.22), inset 0 1px 0 #fff;animation:introArtIn 1.25s var(--ease) both, introFloat 7s ease-in-out 1.5s infinite alternate}
-  .intro-art img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;animation:introImgZoom 7s var(--ease) both}
+  .intro-art img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;animation:introImgZoom 11s var(--ease) both}
   .intro-art::after{content:"";position:absolute;inset:8px;border-radius:inherit;border:1px solid rgba(255,253,248,.7);pointer-events:none}
-  .intro-eyebrow{margin:24px 0 0;display:flex;align-items:center;justify-content:center;gap:14px;font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-2);animation:introUp .9s var(--ease) both;animation-delay:.25s}
+  .intro-eyebrow{margin:24px 0 0;display:flex;align-items:center;justify-content:center;gap:14px;font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-2);animation:introUp 1.15s var(--ease) both;animation-delay:.25s}
   .intro-eyebrow::before,.intro-eyebrow::after{content:"";width:34px;height:1px;background:var(--line)}
-  .intro-word{margin-top:10px;font-family:var(--serif);font-weight:600;font-size:clamp(52px,13vw,76px);line-height:1;letter-spacing:.01em;color:var(--ink);animation:introUp .9s var(--ease) both;animation-delay:.38s}
+  .intro-word{margin-top:10px;font-family:var(--serif);font-weight:600;font-size:clamp(52px,13vw,76px);line-height:1;letter-spacing:.01em;color:var(--ink);animation:introUp 1.15s var(--ease) both;animation-delay:.38s}
   .intro-word em{font-style:italic;font-weight:500;color:var(--bronze)}
-  .intro-tag{margin:12px auto 0;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(21px,5.4vw,26px);line-height:1.35;color:var(--ink-2);animation:introUp .9s var(--ease) both;animation-delay:.5s}
-  .intro-ku{margin:10px 0 0;font-family:"Noto Naskh Arabic",serif;direction:rtl;font-size:19px;line-height:1.8;color:var(--muted);animation:introUp .9s var(--ease) both;animation-delay:.58s}
-  .intro-actions{margin-top:26px;display:flex;flex-direction:column;align-items:center;animation:introUp .9s var(--ease) both;animation-delay:.68s}
+  .intro-tag{margin:12px auto 0;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(21px,5.4vw,26px);line-height:1.35;color:var(--ink-2);animation:introUp 1.15s var(--ease) both;animation-delay:.5s}
+  .intro-ku{margin:10px 0 0;font-family:"Noto Naskh Arabic",serif;direction:rtl;font-size:19px;line-height:1.8;color:var(--muted);animation:introUp 1.15s var(--ease) both;animation-delay:.58s}
+  .intro-actions{margin-top:26px;display:flex;flex-direction:column;align-items:center;animation:introUp 1.15s var(--ease) both;animation-delay:.68s}
   @keyframes enterPulse{0%{box-shadow:0 16px 32px rgba(23,20,16,.26), 0 0 0 0 rgba(176,138,62,.38)}70%{box-shadow:0 16px 32px rgba(23,20,16,.26), 0 0 0 16px rgba(176,138,62,0)}100%{box-shadow:0 16px 32px rgba(23,20,16,.26), 0 0 0 0 rgba(176,138,62,0)}}
   .intro-enter{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;width:min(350px,100%);min-height:64px;padding:10px 12px 10px 28px;border:1px solid rgba(23,20,16,.12);border-radius:999px;font-family:inherit;font-weight:700;font-size:18px;letter-spacing:.02em;color:#fff;background:var(--ink);cursor:pointer;animation:enterPulse 2.6s ease-out infinite;-webkit-tap-highlight-color:transparent;transition:transform .2s var(--ease)}
   .intro-enter:hover{transform:translateY(-2px)}
@@ -518,7 +518,21 @@
   .sticky-btn{flex:none;display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:14.5px;color:#fff;background:var(--ink);padding:13px 19px;border-radius:999px;box-shadow:0 12px 26px rgba(23,20,16,.3)}
   .sticky-btn svg{width:17px;height:17px}
 
+  /* ---------- SOFT GLIDE — the unseen.co feel: pages rise slowly into
+     view as they are scrolled to, and the ambient light drifts a breath
+     behind the scroll, so the page feels cushioned under the finger.
+     Armed by JS only (html.soft + .rv), and only when reduced motion has
+     NOT been requested; without JS, or with reduced motion, nothing here
+     ever applies and the page behaves exactly as it always did. */
+  html.soft .viewer-slot section .sec-head,
+  html.soft .viewer-slot section .sec-body>*{animation:none}
+  .rv{opacity:0;transform:translateY(46px);transition:opacity 1.3s cubic-bezier(.16,1,.3,1),transform 1.3s cubic-bezier(.16,1,.3,1)}
+  .rv.rv-in{opacity:1;transform:none}
+  .px{will-change:transform}
+  .intro,.overlay-in{-webkit-overflow-scrolling:touch}
+
   @media (prefers-reduced-motion: reduce){
+    .rv{opacity:1;transform:none;transition:none}
     .rev,.d1,.d2,.d3,.d4,.d5,.d6,.d7,.d8,section,.cta,.final,footer,.dock,.topbar,h1 .mask>span,.overlay.open .ov-item,.viewer-slot section,.viewer-slot section .sec-head,.viewer-slot section .sec-body>*,.viewer.open .viewer-bar,.viewer.open .vdot,.faq details[open] .a,.intro.leaving .intro-in{animation:none}
     .ticker-track,.emblem .ring,.bato .lion-disc::before,.ambient::before,.ambient::after{animation:none}
     .viewer,.viewer-inner,.overlay,.intro{transition:none}
@@ -837,7 +851,7 @@
 
   /* ---------- BENTO GRID — big tactile tiles, varied sizes ---------- */
   .bento{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:34px;perspective:1200px}
-  .btile{position:relative;display:flex;flex-direction:column;gap:6px;min-height:158px;padding:18px;border-radius:26px;border:1px solid var(--line-soft);background:linear-gradient(180deg,#fffefb,var(--paper));color:var(--ink);text-decoration:none;-webkit-tap-highlight-color:transparent;box-shadow:var(--d-hi), 0 5px 0 rgba(143,107,35,.18), var(--d-s1), var(--d-s2), 0 20px 38px rgba(93,72,38,.10);transition:transform .18s var(--tilt), box-shadow .18s ease, border-color .2s;animation:riseIn .8s var(--ease) both}
+  .btile{position:relative;display:flex;flex-direction:column;gap:6px;min-height:158px;padding:18px;border-radius:26px;border:1px solid var(--line-soft);background:linear-gradient(180deg,#fffefb,var(--paper));color:var(--ink);text-decoration:none;-webkit-tap-highlight-color:transparent;box-shadow:var(--d-hi), 0 5px 0 rgba(143,107,35,.18), var(--d-s1), var(--d-s2), 0 20px 38px rgba(93,72,38,.10);transition:transform .18s var(--tilt), box-shadow .18s ease, border-color .2s;animation:riseIn 1.15s var(--ease) both}
   .bento .btile:nth-child(1){animation-delay:.52s}
   .bento .btile:nth-child(2){animation-delay:.58s}
   .bento .btile:nth-child(3){animation-delay:.64s}
@@ -2605,6 +2619,222 @@
     word.classList.add('replay');
   }
   word.addEventListener('click', rise);
+})();
+</script>
+<script>
+(function(){
+  /* ---------- SOUND + SOFT GLIDE — the unseen.co feel Dana asked for ----------
+     Watching unseen.co, Dana named three things: a sound comes out of it
+     when it opens; the pages rise up slowly; and under the finger
+     everything moves softly. This block adds exactly those three, as
+     small opt-in layers over the page that already exists:
+
+       1. SOUND — tiny WebAudio tones, synthesised in code (no audio
+          files): an airy whoosh with a soft chime as the curtain lifts
+          on Enter, a muted tick when a page (tile) is touched, a low
+          swell when a section opens. They are kept very quiet, and the
+          music player's mute button is the one switch for all of it —
+          muting the piano silences the tones too.
+       2. SLOW RISE — inside an opened section, each block starts
+          lowered and invisible and floats up over 1.3s the moment it
+          nears the screen (IntersectionObserver), instead of everything
+          snapping in at once. Tiles below the fold and the footer rise
+          the same way as they are scrolled to.
+       3. SOFT DRIFT — the ambient light behind the page trails the
+          scroll by a few pixels through a lerped loop, so touch
+          scrolling feels cushioned rather than rigid.
+
+     Safety, in the spirit of the rest of this page: the AudioContext is
+     only ever created inside a real tap (browsers forbid sound before
+     one), every call is wrapped so a failure stays silent, and the
+     glide layer arms only when the visitor has NOT requested reduced
+     motion — with reduced motion, or without IntersectionObserver,
+     this script adds the sounds and nothing else. */
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ================= 1 · SOUND ================= */
+  var AC = window.AudioContext || window.webkitAudioContext;
+  var actx = null, master = null, soundOn = true;
+  function ac(){
+    if(!AC) return null;
+    if(!actx){
+      try{
+        actx = new AC();
+        master = actx.createGain();
+        master.gain.value = .9;
+        master.connect(actx.destination);
+      }catch(e){ actx = null; return null; }
+    }
+    if(actx.state === 'suspended'){ try{ actx.resume(); }catch(e){} }
+    return actx;
+  }
+  function tone(freq, t0, dur, vol, type){
+    var o = actx.createOscillator(), g = actx.createGain();
+    o.type = type || 'sine';
+    o.frequency.value = freq;
+    g.gain.setValueAtTime(0, t0);
+    g.gain.linearRampToValueAtTime(vol, t0 + .02);
+    g.gain.exponentialRampToValueAtTime(.0001, t0 + dur);
+    o.connect(g); g.connect(master);
+    o.start(t0); o.stop(t0 + dur + .05);
+  }
+  function whoosh(t0, dur, vol){
+    var len = Math.max(1, Math.floor(actx.sampleRate * dur));
+    var buf = actx.createBuffer(1, len, actx.sampleRate);
+    var d = buf.getChannelData(0);
+    for(var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    var src = actx.createBufferSource(); src.buffer = buf;
+    var f = actx.createBiquadFilter(); f.type = 'bandpass'; f.Q.value = .9;
+    f.frequency.setValueAtTime(320, t0);
+    f.frequency.exponentialRampToValueAtTime(1500, t0 + dur * .55);
+    f.frequency.exponentialRampToValueAtTime(420, t0 + dur);
+    var g = actx.createGain();
+    g.gain.setValueAtTime(0, t0);
+    g.gain.linearRampToValueAtTime(vol, t0 + dur * .3);
+    g.gain.linearRampToValueAtTime(0, t0 + dur);
+    src.connect(f); f.connect(g); g.connect(master);
+    src.start(t0); src.stop(t0 + dur + .05);
+  }
+  function play(name){
+    if(!soundOn || !ac()) return;
+    try{
+      var t = actx.currentTime + .01;
+      if(name === 'open'){
+        whoosh(t, 1.15, .05);
+        tone(523.25, t + .10, 1.5, .045);
+        tone(783.99, t + .24, 1.6, .035);
+        tone(1046.50, t + .40, 1.8, .022);
+      } else if(name === 'tap'){
+        tone(392.00, t, .16, .028, 'triangle');
+        tone(587.33, t + .015, .12, .014);
+      } else if(name === 'page'){
+        whoosh(t, .55, .028);
+        tone(329.63, t + .03, .8, .026);
+        tone(493.88, t + .12, .9, .020);
+      } else if(name === 'close'){
+        tone(329.63, t, .35, .020);
+      }
+    }catch(e){}
+  }
+  window.sdSound = play;
+
+  /* the opening sound: Enter is the moment the site opens */
+  var enterBtn = document.getElementById('enterWithSound');
+  if(enterBtn) enterBtn.addEventListener('pointerdown', function(){ play('open'); });
+
+  /* a soft tick as the finger lands on a page */
+  Array.prototype.forEach.call(document.querySelectorAll('.btile, .menu-row, .ov-item'), function(el){
+    el.addEventListener('pointerdown', function(){ play('tap'); });
+  });
+  /* section links that are not tiles (footer, overlay shortcuts) swell
+     softly instead; the menu button and the viewer's close button get
+     their own quiet tones */
+  document.addEventListener('click', function(e){
+    var t = e.target;
+    if(!t || !t.closest) return;
+    if(t.closest('#viewerClose') || t.closest('#menuClose')){ play('close'); return; }
+    if(t.closest('#menuOpen')){ play('page'); return; }
+    var a = t.closest('a[href^="#"]');
+    if(a && !a.classList.contains('btile') && !a.classList.contains('menu-row') && !a.classList.contains('ov-item')) play('page');
+  });
+
+  /* one sound switch for the whole site: the player's mute button */
+  var musicBtn = document.getElementById('musicBtn');
+  var bg = document.getElementById('bgMusic');
+  if(musicBtn) musicBtn.addEventListener('click', function(){
+    setTimeout(function(){ soundOn = !bg || !bg.paused; }, 90);
+  });
+
+  /* ================= 2 · SLOW RISE + 3 · SOFT DRIFT ================= */
+  if(reduce || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('soft');
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      var el = en.target;
+      io.unobserve(el);
+      el.classList.add('rv-in');
+      /* once the rise has fully settled, hand the element back to its
+         own styles — the reveal classes come off, nothing stays hidden */
+      setTimeout(function(){
+        el.classList.remove('rv');
+        el.classList.remove('rv-in');
+      }, 1750);
+    });
+  }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0 });
+
+  function armOne(el){
+    if(!el || el.classList.contains('rv-in')) return;
+    /* the first frame must not animate: the element is lowered with its
+       transitions (and any fill-forwards entrance animation) switched
+       off, then the transition is restored so the rise itself is soft */
+    el.style.transition = 'none';
+    el.style.animation = 'none';
+    el.classList.add('rv');
+    void el.offsetWidth;
+    el.style.transition = '';
+    io.observe(el);
+  }
+
+  /* sections: arm each block as the section lands in the viewer panel */
+  var TSEL = '.sec-head, .sec-body > *, .final';
+  function armSection(sec){
+    if(!sec) return;
+    Array.prototype.forEach.call(sec.querySelectorAll(TSEL), armOne);
+  }
+  var slot = document.getElementById('viewerSlot');
+  if(slot && 'MutationObserver' in window){
+    new MutationObserver(function(){
+      Array.prototype.forEach.call(slot.querySelectorAll('section'), armSection);
+    }).observe(slot, { childList: true });
+  }
+
+  /* home: tiles still below the fold when the curtain lifts, and the
+     footer, rise as they are scrolled to. Tiles already on screen keep
+     the entrance choreography they were designed with. */
+  var homeArmed = false;
+  function armHome(){
+    if(homeArmed) return;
+    homeArmed = true;
+    var vh = window.innerHeight || 800;
+    Array.prototype.forEach.call(document.querySelectorAll('.btile'), function(el){
+      if(el.getBoundingClientRect().top > vh * .9) armOne(el);
+    });
+    armOne(document.querySelector('footer'));
+  }
+  var enteredOnce = false;
+  function onEnter(){
+    if(enteredOnce) return;
+    enteredOnce = true;
+    setTimeout(armHome, 1300);
+  }
+  if(enterBtn){
+    enterBtn.addEventListener('pointerdown', onEnter);
+    enterBtn.addEventListener('click', onEnter);
+  }
+  if(document.body.classList.contains('entered')) onEnter();
+
+  /* soft drift: the ambient light trails the scroll by a few pixels,
+     eased through a lerp, so the page feels cushioned under the finger.
+     The layer is scaled a touch past the viewport so its edges can
+     never show while it drifts. */
+  var amb = document.querySelector('.ambient');
+  if(amb){
+    amb.classList.add('px');
+    var cur = 0, ticking = false;
+    var loop = function(){
+      var y = window.scrollY || window.pageYOffset || 0;
+      var target = Math.max(-24, Math.min(24, -y * .02));
+      cur += (target - cur) * .06;
+      amb.style.transform = 'translate3d(0,' + cur.toFixed(2) + 'px,0) scale(1.08)';
+      if(Math.abs(target - cur) > .05) requestAnimationFrame(loop);
+      else ticking = false;
+    };
+    window.addEventListener('scroll', function(){
+      if(!ticking){ ticking = true; requestAnimationFrame(loop); }
+    }, { passive: true });
+  }
 })();
 </script>
 </body>
